@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DashStory</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup">
+    <!-- 头部 -->
+    <header class="popup-header">
+      <div class="popup-logo">
+        <img src="../../assets/icon-32.png" alt="DashStory">
+        <span>DashStory</span>
+      </div>
+      <button class="popup-settings-btn" id="settingsBtn" title="设置">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="popup-main" id="mainView">
+      <!-- API Key设置提示 -->
+      <div class="popup-alert" id="apiKeyAlert" style="display: none;">
+        <p>请先设置API Key以使用DashStory</p>
+        <button class="btn btn--small" id="goToSettings">去设置</button>
+      </div>
+
+      <!-- 快捷操作 -->
+      <div class="popup-actions">
+        <button class="action-btn" id="captureAreaBtn">
+          <div class="action-btn__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5 5h4v2H7v2H5V5zm14 0h-4v2h2v2h2V5zm-7 4h2v6h-2V9zm-7 7h2v2h2v2H5v-4zm12 0h2v4h-4v-2h2v-2z"/>
+            </svg>
+          </div>
+          <span>区域截图</span>
+          <small>Ctrl+Shift+S</small>
+        </button>
+        
+        <button class="action-btn" id="captureFullBtn">
+          <div class="action-btn__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm0 2v14h14V5H5z"/>
+            </svg>
+          </div>
+          <span>整页截图</span>
+          <small>Ctrl+Shift+F</small>
+        </button>
+      </div>
+
+      <!-- 历史记录 -->
+      <div class="popup-section">
+        <div class="popup-section__header">
+          <h3>最近解读</h3>
+          <button class="btn btn--text" id="clearHistoryBtn">清空</button>
+        </div>
+        <div class="history-list" id="historyList">
+          <div class="history-empty" id="historyEmpty">
+            暂无解读记录
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 设置页 -->
+    <div class="popup-settings" id="settingsView" style="display: none;">
+      <div class="settings-header">
+        <button class="btn btn--icon" id="backBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+          </svg>
+        </button>
+        <h3>设置</h3>
+      </div>
+
+      <div class="settings-form">
+        <div class="form-group">
+          <label for="apiKeyInput">API Key</label>
+          <div class="input-group">
+            <input type="password" id="apiKeyInput" placeholder="输入你的API Key">
+            <button class="btn btn--small" id="validateApiKeyBtn">验证</button>
+          </div>
+          <small class="form-hint" id="apiKeyHint"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="languageSelect">语言</label>
+          <select id="languageSelect">
+            <option value="zh">中文</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="voiceSelect">语音风格</label>
+          <select id="voiceSelect">
+            <option value="professional">专业风格</option>
+            <option value="friendly">友好风格</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="autoPlayCheckbox">
+            <span>自动播放语音</span>
+          </label>
+        </div>
+
+        <button class="btn btn--primary btn--block" id="saveSettingsBtn">保存设置</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
