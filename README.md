@@ -1,8 +1,8 @@
-# Visionary.ai
+# DashStory
 
 **Bridging the cognitive gap between data and decision-making.**
 
-Visionary.ai is an AI-driven narrative platform designed to transform complex data dashboards into intuitive, narrated insights. We provide tools for developers and sales teams to align understanding across different cognitive horizons.
+DashStory is an AI-driven narrative platform designed to transform complex data dashboards into intuitive, narrated insights. We provide tools for developers and sales teams to align understanding across different cognitive horizons.
 
 ## Core Capabilities
 
