@@ -1,0 +1,14 @@
+{
+  "name": "dashstory-extension",
+  "version": "1.0.0",
+  "description": "DashStory Chrome Extension - Transform dashboard screenshots into AI-powered voice narrations",
+  "scripts": {
+    "generate-icons": "node scripts/generate-icons.js",
+    "build": "npm run generate-icons && node scripts/build.js",
+    "zip": "node scripts/zip.js"
+  },
+  "devDependencies": {
+    "archiver": "^6.0.2",
+    "sharp": "^0.34.5"
+  }
+}

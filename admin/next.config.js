@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone',
   experimental: {
     serverActions: {
       bodySizeLimit: '2mb',
@@ -10,7 +11,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8000/api/:path*',
+        destination: process.env.API_URL || 'http://localhost:8000/api/:path*',
       },
     ];
   },
