@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DashStory SDK 示例</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+
+    .dashboard {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      opacity: 0.8;
+      font-size: 14px;
+    }
+
+    .panels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .panel-badge {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: #e5e7eb;
+      color: #6b7280;
+    }
+
+    .panel-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .panel-value.positive {
+      color: #059669;
+    }
+
+    .panel-value.negative {
+      color: #dc2626;
+    }
+
+    .panel-change {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .panel-change.positive::before {
+      content: '↑';
+      color: #059669;
+      margin-right: 4px;
+    }
+
+    .panel-change.negative::before {
+      content: '↓';
+      color: #dc2626;
+      margin-right: 4px;
+    }
+
+    .chart-placeholder {
+      height: 120px;
+      background: #f9fafb;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      margin-top: 16px;
+    }
+
+    .instructions {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .instructions h3 {
+      margin-bottom: 12px;
+      color: #374151;
+    }
+
+    .instructions ul {
+      padding-left: 20px;
+      color: #6b7280;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+    }
+
+    .instructions code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="header">
+      <h1>销售数据仪表板</h1>
+      <p>按 Ctrl+Shift+D 打开 DashStory 演示模式</p>
+    </div>
+
+    <div class="panels">
+      <div class="panel" id="panel-revenue">
+        <div class="panel-header">
+          <span class="panel-title">月度收入</span>
+          <span class="panel-badge">本月</span>
+        </div>
+        <div class="panel-value positive">$135,000</div>
+        <div class="panel-change positive">较上月增长 12.5%</div>
+        <div class="chart-placeholder">📈 趋势图</div>
+      </div>
+
+      <div class="panel" id="panel-orders">
+        <div class="panel-header">
+          <span class="panel-title">订单数量</span>
+          <span class="panel-badge">本月</span>
+        </div>
+        <div class="panel-value">1,234</div>
+        <div class="panel-change positive">较上月增长 8.3%</div>
+        <div class="chart-placeholder">📊 分布图</div>
+      </div>
+
+      <div class="panel" id="panel-customers">
+        <div class="panel-header">
+          <span class="panel-title">新增客户</span>
+          <span class="panel-badge">本月</span>
+        </div>
+        <div class="panel-value">89</div>
+        <div class="panel-change negative">较上月减少 5.2%</div>
+        <div class="chart-placeholder">👥 增长图</div>
+      </div>
+
+      <div class="panel" id="panel-conversion">
+        <div class="panel-header">
+          <span class="panel-title">转化率</span>
+          <span class="panel-badge">本月</span>
+        </div>
+        <div class="panel-value positive">3.2%</div>
+        <div class="panel-change positive">较上月增长 0.5%</div>
+        <div class="chart-placeholder">🎯 漏斗图</div>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h3>使用说明</h3>
+      <ul>
+        <li>按 <code>Ctrl+Shift+D</code> (Mac: <code>⌘+Shift+D</code>) 打开演示模式控制栏</li>
+        <li>选择语音风格和要播放的Panel</li>
+        <li>点击"播放"按钮开始AI语音解读</li>
+        <li>支持暂停、继续和停止控制</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DashStory SDK -->
+  <script type="module">
+    // 注意：实际使用时请替换为CDN或npm包引入
+    import DashStory from '../dist/dashstory-sdk.esm.js';
+
+    // 初始化SDK
+    const dashstory = new DashStory({
+      apiKey: 'your-api-key-here', // 替换为真实API Key
+      apiEndpoint: 'http://localhost:8000/api/v1',
+      language: 'zh',
+      hotkey: 'Ctrl+Shift+D'
+    });
+
+    // 注册Panel数据
+    dashstory.registerPanels([
+      {
+        panelId: 'revenue_trend',
+        title: '月度收入趋势',
+        metricType: 'time_series',
+        unit: 'USD',
+        timeRange: '2025-01-01~2025-12-31',
+        data: [
+          { t: '2025-01', v: 120000 },
+          { t: '2025-02', v: 135000 }
+        ],
+        thresholds: { warning: 100000, critical: 80000 },
+        order: 1
+      },
+      {
+        panelId: 'order_count',
+        title: '订单数量分布',
+        metricType: 'distribution',
+        unit: '个',
+        timeRange: '2025-02',
+        data: [
+          { category: '电子产品', value: 450 },
+          { category: '服装', value: 380 },
+          { category: '食品', value: 280 },
+          { category: '其他', value: 124 }
+        ],
+        order: 2
+      },
+      {
+        panelId: 'new_customers',
+        title: '新增客户',
+        metricType: 'single_value',
+        unit: '人',
+        timeRange: '2025-02',
+        data: {
+          value: 89,
+          previousValue: 94,
+          target: 100
+        },
+        thresholds: { warning: 80, critical: 50 },
+        order: 3
+      },
+      {
+        panelId: 'conversion_rate',
+        title: '转化率对比',
+        metricType: 'comparison',
+        unit: '%',
+        timeRange: '2025-02',
+        data: [
+          { name: '网站', current: 3.2, previous: 2.7 },
+          { name: 'APP', current: 4.5, previous: 4.2 },
+          { name: '小程序', current: 2.8, previous: 3.1 }
+        ],
+        order: 4
+      }
+    ]);
+
+    // 初始化并启动
+    dashstory.init().then(() => {
+      console.log('DashStory SDK 已就绪');
+    }).catch(err => {
+      console.error('SDK 初始化失败:', err);
+    });
+
+    // 监听事件
+    dashstory.on('playback:started', (data) => {
+      console.log('开始播放:', data.panelId);
+    });
+
+    dashstory.on('playback:ended', (data) => {
+      console.log('播放结束:', data.panelId);
+    });
+
+    // 暴露到全局用于调试
+    window.dashstory = dashstory;
+  </script>
+</body>
+</html>
